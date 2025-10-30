@@ -1,0 +1,23 @@
+pandas
+# sqlalchemy
+# pymysql
+# python-dotenv
+spacy
+regex
+jupyter
+pycountry
+geopy
+numpy 
+matplotlib 
+seaborn 
+nltk 
+scikit-learn 
+wordcloud 
+networkx 
+folium 
+tqdm
+sqlalchemy
+pymysql
+fastapi 
+uvicorn
+python-dotenv
