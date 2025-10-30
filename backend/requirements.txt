@@ -1,8 +1,7 @@
 pandas
-# sqlalchemy
-# pymysql
-# python-dotenv
-spacy
+sqlalchemy
+pymysql
+python-dotenv
 regex
 jupyter
 pycountry
@@ -16,8 +15,7 @@ wordcloud
 networkx 
 folium 
 tqdm
-sqlalchemy
-pymysql
 fastapi 
 uvicorn
 python-dotenv
+uvicorn[standard]
