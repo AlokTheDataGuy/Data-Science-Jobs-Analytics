@@ -18,4 +18,4 @@ tqdm
 fastapi 
 uvicorn
 python-dotenv
-uvicorn[standard]
+uvicorn[standard
