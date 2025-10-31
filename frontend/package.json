@@ -4,9 +4,7 @@
   "version": "0.0.0",
   "type": "module",
   "scripts": {
-    "dev": "concurrently \"npm run frontend\" \"npm run backend\"",
-    "frontend": "vite",
-    "backend": "cd ../backend && uvicorn main:app --reload",
+    "dev": "vite",
     "build": "vite build",
     "lint": "eslint .",
     "preview": "vite preview"

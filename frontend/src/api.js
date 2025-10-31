@@ -1,7 +1,10 @@
 import axios from "axios";
 
-const BASE_URL = "http://127.0.0.1:8000/api";
-
+const BASE_URL =
+  import.meta.env.MODE === "production"
+    ? "https://data-science-jobs-analytics.onrender.com/api"
+    : "http://127.0.0.1:8000/api"
+    
 export const fetchTopSkills = () => axios.get(`${BASE_URL}/top-skills`);
 export const fetchTopCities = () => axios.get(`${BASE_URL}/top-cities`);
 export const fetchTopCompanies = () => axios.get(`${BASE_URL}/top-companies`);

@@ -1,0 +1,16 @@
+{
+  "version": 2,
+  "builds": [
+    { "src": "vite.config.js", "use": "@vercel/static-build", "config": {} }
+  ],
+  "routes": [
+    { "src": "/api/(.*)", "dest": "https://data-science-jobs-analytics.onrender.com/api/$1" },
+    { "src": "/(.*)", "dest": "/" }
+  ],
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "framework": "vite",
+  "env": {
+    "VITE_API_BASE_URL": "https://data-science-jobs-analytics.onrender.com"
+  }
+}
