@@ -7,7 +7,7 @@ app = FastAPI(title="Data Science Jobs API", version="1.0")
 
 # ✅ Allow frontend (localhost:5173) to access the backend
 origins = [
-    "https://data-science-jobs-analytics.vercel.app/",
+    "https://data-science-jobs-analytics.vercel.app",
     "http://localhost:5173",
     "http://127.0.0.1:5173",
 ]
