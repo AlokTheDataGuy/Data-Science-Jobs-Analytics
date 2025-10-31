@@ -162,10 +162,7 @@ The frontend will start on:
 
 **Alok Deep**  
 Data Analyst | Data Enthusiast | Full-Stack Data Projects  
-📧 [Add your email or portfolio link here]  
-🌐 [Add your LinkedIn / GitHub link here]
+📧 [www.linkedin.com/in/alokthedataguy]  
+🌐 [https://alok-the-data-guy.vercel.app/]
 
 ---
-
-### ⭐ If you find this project useful, please star the repo!
-````
