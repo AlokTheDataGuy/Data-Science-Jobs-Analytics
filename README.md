@@ -74,12 +74,11 @@ data/jobs_raw.csv
 
 Performed in `EDA.ipynb`:
 
-✔ Removed duplicates
-✔ Standardized job titles, cities, states
-✔ Extracted skills from text
-✔ Created skill list by splitting/unpivoting
-✔ Cleaned education & experience columns
-✔ Derived new fields (role category, skill count, etc.)
+* Removed duplicates
+* Standardized job titles, cities, states
+* Extracted skills from text
+* Cleaned education & experience columns
+* Derived new fields (role category, skill count, etc.)
 
 Exported cleaned dataset:
 
@@ -139,15 +138,6 @@ A clean **star schema** was designed with:
 * `education`
 * `experience`
 * `industries`
-* Top 10 tables (from Excel pivots)
-
-### 🔗 Relationships Include:
-
-* `jobs` 1️⃣—🅱️ `jobs_skills`
-* `skills` 1️⃣—🅱️ `jobs_skills`
-* `jobs` 1️⃣—🅱️ `companies`, `cities`, `state`, `education`, `experience`
-
-The model supports dynamic slicing across all filters.
 
 ---
 
