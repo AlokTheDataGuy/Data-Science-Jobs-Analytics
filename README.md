@@ -255,3 +255,14 @@ data-science-jobs-analysis/
 │── requirements.txt
 │── README.md
 ```
+## 🚀 Next Steps
+
+Here are potential enhancements:
+
+1. **Add job trend forecasting** → Prophet or ARIMA
+2. **Perform NLP on job descriptions** → Topic modeling / keyword cloud
+3. **Build a search engine for job filtering** using Streamlit
+4. **Automate daily scraping** with cron + GitHub Actions
+5. **Deploy dashboard publicly** using Power BI service
+
+---
