@@ -151,42 +151,107 @@ The model supports dynamic slicing across all filters.
 
 ---
 
-## 🗺️ Power BI Dashboard Highlights
+# 5️⃣ **Dashboard Development (Power BI)**
 
-- **Choropleth Map of India** — states shaded by job counts.  
-- **Top In-Demand Skills** — visualized through bar charts.  
-- **Top Hiring Companies** — insights into key employers.  
-- **Top Cities for Data Science Jobs** — location-based insights.
+The final dashboard includes:
 
----
+### 📌 KPIs
 
-## 📘 Learning Outcomes
+* Total Jobs
+* Unique Companies
+* Unique Skills
 
-- ETL pipeline design and automation  
-- Cloud database integration (TiDB SQL Cloud)  
-- Building REST APIs with FastAPI  
-- Full-stack data visualization (React + Power BI)  
-- Structuring real-world portfolio projects  
+### 📌 Visuals
 
----
+* **Top Skills in Demand**
+* **Top States & Cities Hiring**
+* **Job Roles Distribution**
+* **Education & Experience Requirements**
+* **Top Hiring Companies**
 
-## 🔮 Future Improvements
+### 📌 Filters
 
-- Add filters for job type, experience, and salary range.  
-- Deploy on a public cloud (e.g., Render/Netlify + TiDB Cloud).  
-- Integrate authentication for user dashboards.  
-- Automate data refresh using scheduled scripts.
-
----
-
-## 👨‍💻 Author
-
-**Alok Deep**  
-Data Analyst | Data Enthusiast | Full-Stack Data Projects  
-📧 [Add your email or portfolio link here]  
-🌐 [Add your LinkedIn / GitHub link here]
+* Job Role
+* Seniority
+* State
+* Skills
+* Education
 
 ---
 
-### ⭐ If you find this project useful, please star the repo!
-````
+# 🛠 Skills Demonstrated
+
+### 🔹 **Python**
+
+* Web Scraping
+* Regex-based skill extraction
+* Cleansing & preprocessing
+
+### 🔹 **Excel**
+
+* Pivot Tables
+* Data aggregation
+* Data validation
+* Slicer-based filtering
+
+### 🔹 **Power BI**
+
+* Data Modeling
+* DAX measures
+* Top-N ranking
+* Relationships & bridge table handling
+* KPI + interactive visual design
+
+---
+
+# 📈 Key Insights
+
+📌 **Communication** is the most demanded skill — soft skills matter.
+📌 **Python, SQL, Machine Learning, AWS** remain core technical requirements.
+📌 **Bengaluru, Hyderabad, Pune** dominate India’s DS job market.
+📌 **Technology & Consulting** are the largest hiring industries.
+📌 **Mid-level experience (3–7 years)** is most commonly required.
+📌 **Masters** degree still preferred for senior roles.
+
+---
+
+# 🚀 Recommendations
+
+### For Job Seekers:
+
+1. Prioritize **Python + SQL + ML + Cloud (AWS/Azure)**
+2. Build projects that demonstrate **end-to-end ML workflows**
+3. Improve **communication & storytelling** skills
+4. Target job applications in **Bengaluru, Hyderabad, Pune**
+5. Consider pursuing Masters if aiming for senior roles
+
+### For Organizations:
+
+* Use insights to refine job posting standards
+* Improve clarity in skill requirements
+* Benchmark hiring trends against industry leaders
+
+---
+
+# 📂 Repository Structure
+
+```
+data-science-jobs-analysis/
+│── data/
+│   ├── jobs_raw.csv
+│   ├── jobs_cleaned.csv
+│
+│── notebook/
+│   ├── EDA.ipynb
+│
+│── scraper/
+│   ├── job_scraper.py
+│   ├── docker-compose.yml
+│   ├── docker-image-starter-cmd
+│
+│── ds-jobs-analysis.xlsx        # Excel Pivot Tables
+│── data-science-jobs-analytics.pbix   # Power BI Dashboard
+│── frontend/                    # Optional UI
+│── requirements.txt
+│── README.md
+```
