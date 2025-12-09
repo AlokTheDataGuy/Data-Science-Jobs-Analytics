@@ -74,12 +74,11 @@ data/jobs_raw.csv
 
 Performed in `EDA.ipynb`:
 
-✔ Removed duplicates
-✔ Standardized job titles, cities, states
-✔ Extracted skills from text
-✔ Created skill list by splitting/unpivoting
-✔ Cleaned education & experience columns
-✔ Derived new fields (role category, skill count, etc.)
+* Removed duplicates
+* Standardized job titles, cities, states
+* Extracted skills from text
+* Cleaned education & experience columns
+* Derived new fields (role category, skill count, etc.)
 
 Exported cleaned dataset:
 
