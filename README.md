@@ -138,15 +138,6 @@ A clean **star schema** was designed with:
 * `education`
 * `experience`
 * `industries`
-* Top 10 tables (from Excel pivots)
-
-### 🔗 Relationships Include:
-
-* `jobs` 1️⃣—🅱️ `jobs_skills`
-* `skills` 1️⃣—🅱️ `jobs_skills`
-* `jobs` 1️⃣—🅱️ `companies`, `cities`, `state`, `education`, `experience`
-
-The model supports dynamic slicing across all filters.
 
 ---
 
