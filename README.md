@@ -1,258 +1,232 @@
+<div align="center">
 
-# 📊 **Data Science Jobs Market Analysis (2025)**
+  <h1>Data Science Jobs Market Analysis — India 2025</h1>
 
-### *Python • Excel • Power BI • Data Modeling • Web Scraping*
+  <p><strong>An end-to-end labour-market analysis built on 9,000+ Data Science job postings scraped from LinkedIn and Indeed — surfacing which skills, cities, industries, and experience bands actually dominate hiring in India today.</strong></p>
 
-## 🚀 Executive Summary
+  <p>
+    <img src="https://img.shields.io/badge/Python-3776AB?logo=python&logoColor=white" alt="Python"/>
+    <img src="https://img.shields.io/badge/Power%20BI-F2C811?logo=powerbi&logoColor=black" alt="Power BI"/>
+    <img src="https://img.shields.io/badge/Excel-217346?logo=microsoftexcel&logoColor=white" alt="Excel"/>
+    <img src="https://img.shields.io/badge/Docker-2496ED?logo=docker&logoColor=white" alt="Docker"/>
+    <img src="https://img.shields.io/badge/Postings-9K%2B-success" alt="Postings"/>
+    <img src="https://img.shields.io/badge/Skills%20Tracked-229-orange" alt="Skills"/>
+  </p>
 
-This project analyzes **9,000+ Data Science job postings across India** collected from platforms like LinkedIn and Indeed using a custom Python-based web scraper. The goal was to understand **what skills, locations, industries, and job roles dominate the Indian job market**, and what qualifications employers expect in 2025.
-
-Using **Python, Excel Pivot Tables, Power Query, and Power BI**, the dataset was cleaned, transformed, modeled, and visualized into a **single-page interactive dashboard** that provides valuable insights for job seekers, career changers, and workforce planners.
-
-### 📌 Key Highlights
-
-* **Total Jobs:** 9K+
-* **Unique Companies Hiring:** 3K+
-* **Unique Skills Identified:** 229
-* **Top Skills:** Communication, Python, SQL, AWS, Leadership
-* **Top Cities Hiring:** Bengaluru, Hyderabad, Pune
-* **Top Industries Hiring:** Technology, Consulting, Finance
-* **Most Required Education:** Masters & Bachelors
-* **Experience Expectation:** 3–7 years for most roles
+</div>
 
 ---
 
-# 🧩 Business Problem
+## Why This Project
 
-The Data Science job landscape evolves quickly — new tools emerge, cloud skills are demanded, and hiring hotspots shift. Candidates often struggle with:
+Every aspiring data scientist asks the same questions: *Which skills should I learn first? Which cities have the most openings? What experience do employers actually expect?* The standard answers come from listicles and LinkedIn opinion posts — opinion-shaped, not data-shaped.
 
-* Which skills should I learn first?
-* What cities/states have the most job opportunities?
-* What job roles dominate the Indian market?
-* What experience and education do companies expect?
-* Which industries hire the most Data professionals?
+This project answers them with data. A custom scraper pulls 9K+ live Data Science postings from LinkedIn and Indeed, the dataset is cleaned and modelled into a star schema, and Power BI surfaces the signal: which skills appear in postings, where hiring is concentrated, what experience and education bands dominate, and which industries are doing the hiring. Everything is reproducible — the scraper runs in Docker, the cleaning pipeline lives in a notebook, and the dashboard reads from a clean fact table.
 
-### ❓ **Guiding Question:**
-
-**“What does the Data Science job market in India look like in 2025, and how can job seekers align themselves with market demand?”**
+> **Guiding question:** *What does the Data Science job market in India look like in 2025, and how can job seekers align themselves with market demand?*
 
 ---
 
-# 🖼️ Dashboard Preview
+## Dashboard Preview
 
-![screenshot](./screenshots/screenshot.png)
+![Dashboard](./screenshots/screenshot.png)
+
+A single-page interactive dashboard with KPIs, top-skill ranking, geographic distribution, role/experience/education breakdowns, and slicers for live filtering by role, seniority, state, skills, and education.
 
 ---
 
-# 🔍 Methodology
+## Headline Findings
 
-## 1️⃣ **Data Scraping (Python)**
+| # | Finding | What it implies |
+|---|---------|-----------------|
+| 1 | **Communication is the most-demanded skill** — ranking above any technical tool | Soft skills aren't a tiebreaker; they're a baseline. Portfolios need to *communicate* findings, not just produce them |
+| 2 | **Python, SQL, AWS, ML form the technical core** | These four cover the floor for most postings; specialise *after* you have all four, not before |
+| 3 | **Bengaluru, Hyderabad, Pune dominate hiring** | Remote-first thinking still loses to relocation-friendly thinking in the Indian DS market |
+| 4 | **3–7 years experience is the modal range** | The market is mid-level-heavy; entry-level and senior roles are both thinner than people assume |
+| 5 | **Masters preferred for senior roles, Bachelors fine for mid-level** | The "do I need a Masters?" question has a tier-dependent answer, not a universal one |
 
-A custom scraper (`job_scraper.py`) was developed using the **JobSpy Docker API** to extract thousands of job postings.
+**Snapshot:** 9K+ postings · 3K+ unique companies · 229 distinct skills tracked · Technology, Consulting, and Finance lead the industry mix.
 
-### Extracted fields included:
+---
 
-* Job title
-* Company
-* Description
-* City & State
-* Skills
-* Education & Experience requirements
-* Seniority & job type
-* Posted date
-* Industry mapping
-
-Raw output stored as:
+## Architecture
 
 ```
-data/jobs_raw.csv
+┌──────────────────────────────────────────────────────────────────┐
+│                     SCRAPING LAYER                                │
+│  scraper/job_scraper.py  +  JobSpy Docker API                     │
+│  → data/jobs_raw.csv     (LinkedIn + Indeed, India-wide)          │
+└───────────────────────────┬──────────────────────────────────────┘
+                            ▼
+┌──────────────────────────────────────────────────────────────────┐
+│                  CLEANING & EDA LAYER                             │
+│  notebook/EDA.ipynb       (pandas, regex skill extraction)        │
+│  → data/jobs_cleaned.csv  (deduped, standardised, enriched)       │
+└───────────────────────────┬──────────────────────────────────────┘
+                            ▼
+          ┌─────────────────┴──────────────────┐
+          ▼                                     ▼
+┌──────────────────┐                 ┌─────────────────────────────┐
+│   EXCEL LAYER    │                 │       MODELLING LAYER        │
+│                  │                 │  Power BI star schema        │
+│  Pivot tables    │                 │  Fact: jobs                  │
+│  for validation  │                 │  Dims: skills, companies,    │
+│  + dimension     │                 │  cities, states, roles,      │
+│  table export    │                 │  education, experience,      │
+│                  │                 │  industries + bridge tables  │
+└──────────────────┘                 └──────────────┬──────────────┘
+                                                    ▼
+                                     ┌─────────────────────────────┐
+                                     │     DASHBOARD LAYER          │
+                                     │  data-science-jobs-analytics │
+                                     │  .pbix — KPIs, top-N visuals,│
+                                     │  geographic & role filters   │
+                                     └─────────────────────────────┘
 ```
 
----
+**Design choices worth calling out:**
 
-## 2️⃣ **Data Cleaning & EDA (Jupyter Notebook)**
-
-Performed in `EDA.ipynb`:
-
-* Removed duplicates
-* Standardized job titles, cities, states
-* Extracted skills from text
-* Cleaned education & experience columns
-* Derived new fields (role category, skill count, etc.)
-
-Exported cleaned dataset:
-
-```
-data/jobs_cleaned.csv
-```
+- **Scraper containerised via Docker.** JobSpy runs as a service the scraper hits over HTTP — clean separation between the scraping engine and the orchestration script. Re-running on a different machine is `docker compose up`, not a dependency hunt.
+- **Bridge table for skills.** Skills are many-to-many with jobs (one posting has multiple skills; one skill appears in many postings). Modelled correctly with a `jobs_skills` bridge instead of comma-stuffing a single column — which is what makes Top-N skill ranking actually work in DAX.
+- **Excel as a validation layer, not a destination.** Pivot tables were used to sanity-check distributions before they hit Power BI. If pivot counts disagreed with model counts, the model was wrong. This catches schema mistakes early.
 
 ---
 
-# 3️⃣ **Excel Analysis (Pivot Tables)**
+## Methodology
 
-Before building the Power BI dashboard, **Excel Pivot Tables** were used for validation, exploration, and generating dimension tables.
+### 1. Scraping (Python + Docker)
 
-### ✔ Pivots Created
+A custom scraper (`job_scraper.py`) hits the JobSpy Docker API to pull postings from LinkedIn and Indeed across India. Fields extracted:
 
-| Pivot Table                | Purpose                                  |
-| -------------------------- | ---------------------------------------- |
-| **Top States Hiring**      | Count jobs per state                     |
-| **Top Cities Hiring**      | Identify major hiring hotspots           |
-| **Top Companies**          | Companies with the highest hiring volume |
-| **Top Skills**             | Skill frequency across all postings      |
-| **Job Roles Distribution** | Count of Data Analyst, ML Engineer, etc. |
-| **Education Requirement**  | Masters vs Bachelors vs PhD              |
-| **Experience Required**    | 0–12 years distribution                  |
+`job title` · `company` · `description` · `city` · `state` · `skills` · `education` · `experience` · `seniority` · `job type` · `posted date` · `industry`
 
-### ✔ Why Excel?
+Raw output → `data/jobs_raw.csv`.
 
-* Quick exploratory analysis
-* Fast validation before BI modeling
-* Easy export of Top 10 datasets
-* Served as **dimension tables** in Power BI
+### 2. Cleaning & EDA (Jupyter)
 
-All pivot tables were saved inside:
+Performed in `notebook/EDA.ipynb`:
 
-```
-ds-jobs-analysis.xlsx
-```
+- Deduplicated postings (same title + company + city collapses)
+- Standardised job titles, cities, and states (case, punctuation, abbreviations)
+- Extracted structured skills from free-text descriptions using regex against a 229-skill dictionary
+- Cleaned education and experience fields into ordinal bands
+- Derived role categories and per-posting skill counts
 
----
+Cleaned output → `data/jobs_cleaned.csv`.
 
-# 4️⃣ **Data Modeling (Power BI)**
+### 3. Excel Pivot Validation
 
-A clean **star schema** was designed with:
+Pivot tables in `ds-jobs-analysis.xlsx` were used to validate distributions and export dimension tables before Power BI modelling:
 
-### 📌 Fact Table
+| Pivot | Purpose |
+|-------|---------|
+| Top States Hiring | Posting count by state |
+| Top Cities Hiring | Hiring hotspot identification |
+| Top Companies | Companies with highest hiring volume |
+| Top Skills | Skill frequency across all postings |
+| Job Roles Distribution | Count by role (Data Analyst, ML Engineer, etc.) |
+| Education Requirement | Masters vs Bachelors vs PhD breakdown |
+| Experience Required | 0–12 year distribution |
 
-* `jobs` (1 row per job posting)
+### 4. Power BI Modelling
 
-### 📌 Dimension Tables
+A clean star schema:
 
-* `skills`
-* `jobs_skills` (bridge table for many-to-many relationships)
-* `companies`
-* `cities`
-* `state`
-* `job_roles`
-* `education`
-* `experience`
-* `industries`
+- **Fact:** `jobs` (one row per posting)
+- **Dimensions:** `skills`, `companies`, `cities`, `states`, `job_roles`, `education`, `experience`, `industries`
+- **Bridge:** `jobs_skills` (many-to-many resolution between jobs and skills)
+
+### 5. Dashboard
+
+KPIs (Total Jobs · Unique Companies · Unique Skills) on top, with visuals for top skills, geographic concentration, role distribution, education/experience requirements, and top hiring companies. Filters: role, seniority, state, skills, education.
 
 ---
 
-# 5️⃣ **Dashboard Development (Power BI)**
+## Recommendations
 
-The final dashboard includes:
+### For job seekers
 
-### 📌 KPIs
+1. **Cover the floor before specialising** — Python + SQL + ML + one cloud (AWS or Azure) appears in the majority of postings; deep specialism only pays off after that
+2. **Build end-to-end projects, not notebooks** — postings emphasise production workflow language, not Kaggle accuracy
+3. **Treat communication as a hard skill** — the data is unambiguous; it's the most-mentioned skill, full stop
+4. **Concentrate the job search on Bengaluru, Hyderabad, Pune** — three cities account for the bulk of postings; broad national searches dilute effort
+5. **Pursue a Masters only if targeting senior roles** — mid-level roles do not require it; entry-to-mid candidates over-optimise for a credential that won't be checked
 
-* Total Jobs
-* Unique Companies
-* Unique Skills
+### For organisations
 
-### 📌 Visuals
-
-* **Top Skills in Demand**
-* **Top States & Cities Hiring**
-* **Job Roles Distribution**
-* **Education & Experience Requirements**
-* **Top Hiring Companies**
-
-### 📌 Filters
-
-* Job Role
-* Seniority
-* State
-* Skills
-* Education
+- Audit job posting clarity against market norms — vague skill requirements correlate with longer time-to-fill
+- Benchmark experience and education bands against the distribution to avoid over-specifying
+- Use industry-mix data to identify where you're competing for talent, not just hiring it
 
 ---
 
-# 🛠 Skills Demonstrated
+## Skills Demonstrated
 
-### 🔹 **Python**
-
-* Web Scraping
-* Regex-based skill extraction
-* Cleansing & preprocessing
-
-### 🔹 **Excel**
-
-* Pivot Tables
-* Data aggregation
-* Data validation
-* Slicer-based filtering
-
-### 🔹 **Power BI**
-
-* Data Modeling
-* DAX measures
-* Top-N ranking
-* Relationships & bridge table handling
-* KPI + interactive visual design
+| Tool | Skills |
+|------|--------|
+| **Python** | Web scraping · Docker API integration · Regex-based skill extraction · Cleansing & preprocessing |
+| **Excel** | Pivot tables · Slicer-based filtering · Data validation · Aggregation |
+| **Power BI** | Star-schema modelling · Bridge tables for many-to-many · DAX measures · Top-N ranking · Interactive visual design |
 
 ---
 
-# 📈 Key Insights
-
-📌 **Communication** is the most demanded skill — soft skills matter.
-📌 **Python, SQL, Machine Learning, AWS** remain core technical requirements.
-📌 **Bengaluru, Hyderabad, Pune** dominate India’s DS job market.
-📌 **Technology & Consulting** are the largest hiring industries.
-📌 **Mid-level experience (3–7 years)** is most commonly required.
-📌 **Masters** degree still preferred for senior roles.
-
----
-
-# 🚀 Recommendations
-
-### For Job Seekers:
-
-1. Prioritize **Python + SQL + ML + Cloud (AWS/Azure)**
-2. Build projects that demonstrate **end-to-end ML workflows**
-3. Improve **communication & storytelling** skills
-4. Target job applications in **Bengaluru, Hyderabad, Pune**
-5. Consider pursuing Masters if aiming for senior roles
-
-### For Organizations:
-
-* Use insights to refine job posting standards
-* Improve clarity in skill requirements
-* Benchmark hiring trends against industry leaders
-
----
-
-# 📂 Repository Structure
+## Repository Structure
 
 ```
 data-science-jobs-analysis/
-│── data/
-│   ├── jobs_raw.csv
-│   ├── jobs_cleaned.csv
-│
-│── notebook/
-│   ├── EDA.ipynb
-│
-│── scraper/
-│   ├── job_scraper.py
-│   ├── docker-compose.yml
-│   ├── docker-image-starter-cmd
-│
-│── ds-jobs-analysis.xlsx        # Excel Pivot Tables
-│── data-science-jobs-analytics.pbix   # Power BI Dashboard
-│── frontend/                    # Optional UI
-│── requirements.txt
-│── README.md
+├── data/
+│   ├── jobs_raw.csv                        # Scraper output
+│   └── jobs_cleaned.csv                    # Post-EDA, dashboard-ready
+├── scraper/
+│   ├── job_scraper.py                      # Main scraper script
+│   ├── docker-compose.yml                  # JobSpy API container
+│   └── docker-image-starter-cmd            # Setup commands
+├── notebook/
+│   └── EDA.ipynb                           # Cleaning + exploratory analysis
+├── ds-jobs-analysis.xlsx                   # Pivot validation + dimension export
+├── data-science-jobs-analytics.pbix        # Power BI dashboard
+├── screenshots/
+│   └── screenshot.png
+├── requirements.txt
+└── README.md
 ```
-## 🚀 Next Steps
-
-Here are potential enhancements:
-
-1. **Add job trend forecasting** → Prophet or ARIMA
-2. **Perform NLP on job descriptions** → Topic modeling / keyword cloud
-3. **Build a search engine for job filtering** using Streamlit
-4. **Automate daily scraping** with cron + GitHub Actions
-5. **Deploy dashboard publicly** using Power BI service
 
 ---
+
+## Run It
+
+```bash
+# 1. Start the JobSpy scraper container
+cd scraper
+docker compose up -d
+
+# 2. Run the scraper (pulls fresh postings)
+pip install -r ../requirements.txt
+python job_scraper.py
+
+# 3. Clean and explore
+jupyter lab ../notebook/EDA.ipynb
+
+# 4. Open the dashboard
+# data-science-jobs-analytics.pbix in Power BI Desktop
+```
+
+---
+
+## Next Steps
+
+Natural extensions if this becomes a longer-running project:
+
+- **Daily scraping automation** — cron + GitHub Actions for a continuously refreshed dataset
+- **Time-series layer** — track how skill demand shifts week-over-week (Prophet or ARIMA)
+- **NLP on job descriptions** — topic modelling, keyword extraction, sentiment of description tone
+- **Public deployment** — Streamlit search interface or Power BI service publish, so other job seekers can use it
+- **Salary enrichment** — join with Glassdoor / AmbitionBox where available
+
+---
+
+## Author
+
+**Alok Deep** — Building toward data science roles in Bengaluru. This project is partly a market-analysis exercise and partly a self-targeting tool — the same data informs my own learning roadmap.
+
+[LinkedIn](#) · [Portfolio](#) · [Email](#)
